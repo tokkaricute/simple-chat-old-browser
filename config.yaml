@@ -1,0 +1,9 @@
+api_url: "http://127.0.0.1:11434/v1"
+port: 8875
+default_system_prompt_name: "Assistant"
+default_llm_model: "gemma4:e2b"
+system_prompts:
+  Assistant:
+    content: "あなたは親切で優秀なアシスタントです。ハルシネーションは禁止です。マークダウン形式は禁止です。リストは、'-' を用いて下さい。"
+  Assistant2:
+    content: ""
