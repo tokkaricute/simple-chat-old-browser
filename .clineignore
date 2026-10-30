@@ -1,0 +1,9 @@
+!include .gitignore
+
+# dotenv environment variable files
+.env
+.env.*
+!.env.example
+
+# AWS Credential
+~/.aws/
