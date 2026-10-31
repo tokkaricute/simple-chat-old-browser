@@ -1,4 +1,4 @@
-api_url: "http://127.0.0.1:1234/v1"
+api_url: "http://127.0.0.1:1234/v1"  # Ollamaにする場合は、"http://127.0.0.1:11434/v1" にする
 port: 8875
 default_system_prompt_name: "Assistant"
 default_llm_model: "gemma4:e2b"
