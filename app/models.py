@@ -8,12 +8,12 @@ class Message(BaseModel):
     created_at: Optional[str] = None
 
 class Session(BaseModel):
-    id: int
+    id: str
     name: str
     created_at: str
 
 class ChatRequest(BaseModel):
-    session_id: int
+    session_id: str
     message: str
     system_prompt: Optional[str] = None
     model: Optional[str] = None
