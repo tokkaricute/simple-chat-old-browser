@@ -60,8 +60,8 @@ llm_service = LLMService(config.api_url)
 def get_db_path_for_request(request: Request, session_id: str) -> str:
     mode = getattr(app.state, 'mode', 'persistent')
     if mode == 'ephemeral':
-        # For ephemeral mode, use a session-specific temp file.
-        return f'/tmp/chat_ephemeral_{session_id}.db'
+        # For ephemeral mode, use a session-specific temp file in the OS-specific temp directory.
+        return os.path.join(tempfile.gettempdir(), f'chat_ephemeral_{session_id}.db')
     else:
         return getattr(app.state, 'db_path', 'chat_sessions.db')
 
