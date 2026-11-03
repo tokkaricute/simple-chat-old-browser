@@ -20,6 +20,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${url}${separator}t=${new Date().getTime()}`;
     };
 
+    // Helper for generating UUIDs (fallback for older browsers)
+    const generateUUID = () => {
+        if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+            return crypto.randomUUID();
+        }
+        // Fallback implementation for older browsers (UUID v4)
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+            const r = Math.random() * 16 | 0;
+            const v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    };
+
+
     // Initialization
     async function init() {
         console.log("Initializing app...");
@@ -35,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log("Running in ephemeral mode.");
                 if (sidebar) sidebar.style.display = 'none';
                 // Use a random UUID for the session in ephemeral mode
-                currentSessionId = crypto.randomUUID();
+                currentSessionId = generateUUID();
             } else {
                 console.log("Running in persistent mode.");
                 // Load sessions for persistent mode
@@ -248,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (appConfig && appConfig.mode === 'ephemeral') {
             chatMessages.innerHTML = '';
-            currentSessionId = crypto.randomUUID(); 
+            currentSessionId = generateUUID(); 
             return;
         }
 
