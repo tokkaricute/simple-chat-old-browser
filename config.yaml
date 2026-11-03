@@ -1,7 +1,7 @@
 api_url: "http://127.0.0.1:1234/v1"  # Ollamaにする場合は、"http://127.0.0.1:11434/v1" にする
 port: 8875
 default_system_prompt_name: "Assistant"
-default_llm_model: "gemma4:e2b"
+default_llm_model: ""
 system_prompts:
   Assistant:
     content: "あなたは親切で優秀なアシスタントです。ハルシネーションは禁止です。マークダウン形式は禁止です。リストは、'-' を用いて下さい。"

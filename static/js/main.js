@@ -116,12 +116,30 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Failed to fetch models');
             const data = await response.json();
             modelSelect.innerHTML = ''; // Clear existing options
-            data.models.forEach(model => {
+
+            const models = data.models || [];
+            let defaultModelFound = false;
+            const targetDefaultModel = (config && config.default_llm_model) ? config.default_llm_model.trim() : null;
+
+            models.forEach(model => {
                 const option = document.createElement('option');
                 option.value = model;
                 option.textContent = model;
                 modelSelect.appendChild(option);
+
+                if (targetDefaultModel && model.trim() === targetDefaultModel) {
+                    defaultModelFound = true;
+                }
             });
+
+            if (targetDefaultModel) {
+                if (defaultModelFound) {
+                    modelSelect.value = targetDefaultModel;
+                } else {
+                    console.warn(`Default model "${targetDefaultModel}" not found in available models:`, models);
+                    modelSelect.value = '';  // 空文字列にして sendMessage() で default_llm_model がフォールバックされるようにする
+                }
+            }
         } catch (e) {
             console.error('Error loading models:', e);
         }
